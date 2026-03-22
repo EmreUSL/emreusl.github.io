@@ -1,4 +1,2 @@
 # emreusl.github.io
 
-
-Selam
