@@ -2,11 +2,106 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>EmreUSL</title>
-  <link rel="stylesheet" href="style.css">
+
+  <!-- TITLE -->
+  <title>Emre Usul | QA Engineer & SDET | Test Automation Portfolio</title>
+
+  <!-- META DESCRIPTION -->
+  <meta name="description" content="Portfolio of Emre Usl, QA Engineer & SDET specializing in test automation, CI/CD, and software quality engineering.">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa, #e0e7ff);
+      color: #111;
+      overflow-x: hidden;
+    }
+
+    /* BACKGROUND CANVAS */
+    #bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    /* NAVBAR */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #6366f1;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(90deg, #6366f1, #8b5cf6);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      margin-top: 20px;
+      opacity: 0.7;
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    /* CARDS */
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 40px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      width: 260px;
+      padding: 25px;
+      border-radius: 20px;
+      text-decoration: none;
+      color: inherit;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(99,102,241,0.2);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 20px 50px rgba(99,102,241,0.3);
+    }
+  </style>
 </head>
 <body>
 
+<!-- ANIMATED BACKGROUND -->
+<canvas id="bg"></canvas>
+
+<!-- NAV -->
 <nav>
   <a href="index.html">Home</a>
   <a href="about.html">About</a>
@@ -14,11 +109,17 @@
   <a href="blog.html">Blog</a>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <h1>QA Engineer / SDET / Test Automation</h1>
-  <p>Ben Emre. Söz uçar yazı kalır. Edindiğim tüm tecrübeleri hem kendimle hemde sizle paylaşıyorum.</p>
+  <p>
+    Söz uçar, log kalır.  
+    <br>
+    I turn bugs into knowledge.
+  </p>
 </section>
 
+<!-- CARDS -->
 <section class="cards">
   <a href="about.html" class="card">
     <h2>👨‍💻 About Me</h2>
@@ -35,6 +136,54 @@
     <p>Notes, learnings & insights</p>
   </a>
 </section>
+
+<!-- ANIMATION SCRIPT -->
+<script>
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    radius: Math.random() * 2,
+    dx: Math.random() - 0.5,
+    dy: Math.random() - 0.5
+  });
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach(p => {
+    p.x += p.dx;
+    p.y += p.dy;
+
+    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fillStyle = "#6366f1";
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+/* responsive fix */
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
 
 </body>
 </html>
