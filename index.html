@@ -27,8 +27,11 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      z-index: -2;
     }
+
+    <canvas id="bg"></canvas>
+    <div class="log-overlay"></div>
 
     /* NAVBAR */
     nav {
@@ -139,124 +142,46 @@
 
 <!-- ANIMATION SCRIPT -->
 <script>
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
+const logContainer = document.querySelector(".log-overlay");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-/* PLANETS */
-const earth = { x: 150, y: canvas.height - 150, r: 40 };
-const moon = { x: canvas.width - 150, y: 150, r: 25 };
-
-const extraPlanets = [
-  { x: canvas.width * 0.7, y: canvas.height * 0.7, r: 20 },
-  { x: canvas.width * 0.3, y: canvas.height * 0.3, r: 18 }
+const logs = [
+  "[ RUNNING ] login_test",
+  "[ PASS ] checkout_test",
+  "[ FAIL ] payment_test",
+  "[ RUNNING ] api_test",
+  "Retrying...",
+  "AssertionError: expected 200",
+  "[ PASS ] user_flow",
+  "[ RUNNING ] regression_suite"
 ];
 
-/* ROCKET PATH */
-let t = 0;
-let phase = 0;
+function createLogLine() {
+  const el = document.createElement("div");
+  el.textContent = logs[Math.floor(Math.random() * logs.length)];
 
-/* TRAIL */
-let trail = [];
+  el.style.position = "absolute";
+  el.style.left = Math.random() * 100 + "%";
+  el.style.top = "100%";
 
-function drawPlanet(p, color) {
-  ctx.beginPath();
-  ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-  ctx.fillStyle = color;
-  ctx.fill();
-}
+  logContainer.appendChild(el);
 
-function getPosition() {
-  t += 0.003;
+  let y = window.innerHeight;
 
-  if (t > 1) {
-    t = 0;
-    phase = (phase + 1) % 3;
+  function move() {
+    y -= 0.5;
+    el.style.top = y + "px";
+
+    if (y > -20) {
+      requestAnimationFrame(move);
+    } else {
+      el.remove();
+    }
   }
 
-  let start, end;
-
-  if (phase === 0) {
-    start = earth;
-    end = moon;
-  } else if (phase === 1) {
-    start = moon;
-    end = extraPlanets[0];
-  } else {
-    start = extraPlanets[0];
-    end = extraPlanets[1];
-  }
-
-  return {
-    x: start.x + (end.x - start.x) * t,
-    y: start.y + (end.y - start.y) * t
-  };
+  move();
 }
 
-function drawRocket(x, y) {
-  ctx.save();
-  ctx.translate(x, y);
-
-  ctx.fillStyle = "#fff";
-
-  // body
-  ctx.beginPath();
-  ctx.moveTo(0, -10);
-  ctx.lineTo(6, 10);
-  ctx.lineTo(-6, 10);
-  ctx.closePath();
-  ctx.fill();
-
-  // flame
-  ctx.beginPath();
-  ctx.moveTo(0, 12);
-  ctx.lineTo(3, 20);
-  ctx.lineTo(-3, 20);
-  ctx.closePath();
-  ctx.fillStyle = "#f97316";
-  ctx.fill();
-
-  ctx.restore();
-}
-
-function drawTrail() {
-  trail.forEach((p, i) => {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(99,102,241," + (i / trail.length) + ")";
-    ctx.fill();
-  });
-}
-
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // planets
-  drawPlanet(earth, "#3b82f6");
-  drawPlanet(moon, "#e5e7eb");
-  extraPlanets.forEach(p => drawPlanet(p, "#8b5cf6"));
-
-  // rocket movement
-  let pos = getPosition();
-
-  trail.push({ x: pos.x, y: pos.y });
-  if (trail.length > 60) trail.shift();
-
-  drawTrail();
-  drawRocket(pos.x, pos.y);
-
-  requestAnimationFrame(animate);
-}
-
-animate();
-
-/* responsive */
-window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
+setInterval(createLogLine, 800);
 </script>
 
 </body>
