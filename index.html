@@ -2,103 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QA Engineer Portfolio</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #f5f7fa, #e0e7ff);
-      color: #111;
-    }
-
-    header {
-      text-align: center;
-      padding: 100px 20px;
-    }
-
-    h1 {
-      font-size: 3rem;
-      background: linear-gradient(90deg, #6366f1, #8b5cf6);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .subtitle {
-      opacity: 0.7;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 40px 20px;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 25px;
-      margin-bottom: 20px;
-      box-shadow: 0 10px 30px rgba(99,102,241,0.2);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 5px 10px;
-      border-radius: 10px;
-      background: #6366f1;
-      color: white;
-      font-size: 12px;
-      margin-right: 5px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 40px;
-      opacity: 0.6;
-    }
-  </style>
+  <title>QA Engineer</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="showcase.html">Showcase</a>
+  <a href="blog.html">Blog</a>
+</nav>
+
+<section class="hero">
   <h1>QA Engineer</h1>
-  <p class="subtitle">Testing the future, one bug at a time</p>
-</header>
+  <p>Building quality into the future</p>
+</section>
 
-<div class="container">
-
-  <div class="card">
+<section class="cards">
+  <a href="about.html" class="card">
     <h2>👨‍💻 About Me</h2>
-    <p>I am a QA Engineer focused on automation, performance and quality-driven development.</p>
-  </div>
+    <p>Who I am and my QA mindset</p>
+  </a>
 
-  <div class="card">
-    <h2>🚀 Showcase Projects</h2>
-    <p><strong>Test Automation Framework</strong></p>
-    <span class="tag">Selenium</span>
-    <span class="tag">Java</span>
-    <span class="tag">CI/CD</span>
-    <p>End-to-end automation framework with reporting and CI integration.</p>
-  </div>
+  <a href="showcase.html" class="card">
+    <h2>🚀 Showcase</h2>
+    <p>Automation & testing projects</p>
+  </a>
 
-  <div class="card">
-    <h2>📚 QA Notes</h2>
-    <p>- API Testing Strategies</p>
-    <p>- Test Pyramid Explained</p>
-    <p>- CI/CD Best Practices</p>
-  </div>
-
-</div>
-
-<footer>
-  © 2026 QA Portfolio
-</footer>
+  <a href="blog.html" class="card">
+    <h2>📚 Blog</h2>
+    <p>Notes, learnings & insights</p>
+  </a>
+</section>
 
 </body>
 </html>
