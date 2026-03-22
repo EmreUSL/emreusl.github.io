@@ -30,10 +30,21 @@
       z-index: -2;
     }
 
-    
-
-    <canvas id="bg"></canvas>
-    <div class="log-overlay"></div>
+    /* LOG OVERLAY */
+    .log-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      font-family: monospace;
+      font-size: 12px;
+      color: rgba(0,0,0,0.08);
+      pointer-events: none;
+      padding: 20px;
+      line-height: 1.6;
+    }
 
     /* NAVBAR */
     nav {
@@ -95,111 +106,97 @@
       transition: 0.3s;
     }
 
-    .log-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  font-family: monospace;
-  font-size: 12px;
-  color: rgba(0,0,0,0.08);
-  pointer-events: none;
-  padding: 20px;
-  line-height: 1.6;
-}
-
     .card:hover {
       transform: translateY(-10px) scale(1.03);
       box-shadow: 0 20px 50px rgba(99,102,241,0.3);
     }
+
   </style>
 </head>
 <body>
 
-<!-- ANIMATED BACKGROUND -->
-<canvas id="bg"></canvas>
+  <!-- ANIMATED BACKGROUND -->
+  <canvas id="bg"></canvas>
+  <div class="log-overlay"></div>
 
-<!-- NAV -->
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="showcase.html">Showcase</a>
-  <a href="blog.html">Blog</a>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="showcase.html">Showcase</a>
+    <a href="blog.html">Blog</a>
+  </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <h1>QA Engineer / SDET / Test Automation</h1>
-  <p>
-    Söz uçar, log kalır.  
-    <br>
-    I turn bugs into knowledge.
-  </p>
-</section>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>QA Engineer / SDET / Test Automation</h1>
+    <p>
+      Söz uçar, log kalır.<br>
+      I turn bugs into knowledge.
+    </p>
+  </section>
 
-<!-- CARDS -->
-<section class="cards">
-  <a href="about.html" class="card">
-    <h2>👨‍💻 About Me</h2>
-    <p>Who I am and my QA mindset</p>
-  </a>
+  <!-- CARDS -->
+  <section class="cards">
+    <a href="about.html" class="card">
+      <h2>👨‍💻 About Me</h2>
+      <p>Who I am and my QA mindset</p>
+    </a>
 
-  <a href="showcase.html" class="card">
-    <h2>🚀 Showcase</h2>
-    <p>Automation & testing projects</p>
-  </a>
+    <a href="showcase.html" class="card">
+      <h2>🚀 Showcase</h2>
+      <p>Automation & testing projects</p>
+    </a>
 
-  <a href="blog.html" class="card">
-    <h2>📚 Blog</h2>
-    <p>Notes, learnings & insights</p>
-  </a>
-</section>
+    <a href="blog.html" class="card">
+      <h2>📚 Blog</h2>
+      <p>Notes, learnings & insights</p>
+    </a>
+  </section>
 
-<!-- ANIMATION SCRIPT -->
-<script>
-const logContainer = document.querySelector(".log-overlay");
+  <!-- ANIMATION SCRIPT -->
+  <script>
+    const logContainer = document.querySelector(".log-overlay");
 
-const logs = [
-  "[ RUNNING ] login_test",
-  "[ PASS ] checkout_test",
-  "[ FAIL ] payment_test",
-  "[ RUNNING ] api_test",
-  "Retrying...",
-  "AssertionError: expected 200",
-  "[ PASS ] user_flow",
-  "[ RUNNING ] regression_suite"
-];
+    const logs = [
+      "[ RUNNING ] login_test",
+      "[ PASS ] checkout_test",
+      "[ FAIL ] payment_test",
+      "[ RUNNING ] api_test",
+      "Retrying...",
+      "AssertionError: expected 200",
+      "[ PASS ] user_flow",
+      "[ RUNNING ] regression_suite"
+    ];
 
-function createLogLine() {
-  const el = document.createElement("div");
-  el.textContent = logs[Math.floor(Math.random() * logs.length)];
+    function createLogLine() {
+      const el = document.createElement("div");
+      el.textContent = logs[Math.floor(Math.random() * logs.length)];
 
-  el.style.position = "absolute";
-  el.style.left = Math.random() * 100 + "%";
-  el.style.top = "100%";
+      el.style.position = "absolute";
+      el.style.left = Math.random() * 100 + "%";
+      el.style.top = "100%";
 
-  logContainer.appendChild(el);
+      logContainer.appendChild(el);
 
-  let y = window.innerHeight;
+      let y = window.innerHeight;
 
-  function move() {
-    y -= 0.5;
-    el.style.top = y + "px";
+      function move() {
+        y -= 0.5;
+        el.style.top = y + "px";
 
-    if (y > -20) {
-      requestAnimationFrame(move);
-    } else {
-      el.remove();
+        if (y > -20) {
+          requestAnimationFrame(move);
+        } else {
+          el.remove();
+        }
+      }
+
+      move();
     }
-  }
 
-  move();
-}
-
-setInterval(createLogLine, 800);
-</script>
+    setInterval(createLogLine, 800);
+  </script>
 
 </body>
 </html>
