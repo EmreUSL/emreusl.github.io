@@ -145,21 +145,42 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+/* PARTICLES */
 let particles = [];
-
-for (let i = 0; i < 80; i++) {
+for (let i = 0; i < 50; i++) {
   particles.push({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
-    radius: Math.random() * 2,
     dx: Math.random() - 0.5,
     dy: Math.random() - 0.5
   });
 }
 
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+/* NODES (test system) */
+let nodes = [];
+for (let i = 0; i < 8; i++) {
+  nodes.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height
+  });
+}
 
+/* FAKE TEST LOGS */
+let logs = [];
+const logTexts = ["PASS", "FAIL", "RUNNING", "ASSERT", "RETRY"];
+
+function createLog() {
+  logs.push({
+    text: logTexts[Math.floor(Math.random() * logTexts.length)],
+    x: Math.random() * canvas.width,
+    y: canvas.height + 20,
+    speed: 1 + Math.random() * 2
+  });
+}
+
+setInterval(createLog, 800);
+
+function drawParticles() {
   particles.forEach(p => {
     p.x += p.dx;
     p.y += p.dy;
@@ -168,17 +189,61 @@ function animate() {
     if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
 
     ctx.beginPath();
-    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
     ctx.fillStyle = "#6366f1";
     ctx.fill();
   });
+}
+
+function drawNodes() {
+  ctx.strokeStyle = "rgba(99,102,241,0.2)";
+
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      ctx.beginPath();
+      ctx.moveTo(nodes[i].x, nodes[i].y);
+      ctx.lineTo(nodes[j].x, nodes[j].y);
+      ctx.stroke();
+    }
+  }
+
+  nodes.forEach(n => {
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, 4, 0, Math.PI * 2);
+    ctx.fillStyle = "#8b5cf6";
+    ctx.fill();
+  });
+}
+
+function drawLogs() {
+  ctx.font = "12px monospace";
+
+  logs.forEach((log, index) => {
+    log.y -= log.speed;
+
+    let color = "#6366f1";
+    if (log.text === "FAIL") color = "#ef4444";
+    if (log.text === "PASS") color = "#10b981";
+
+    ctx.fillStyle = color;
+    ctx.fillText(log.text, log.x, log.y);
+  });
+
+  logs = logs.filter(l => l.y > -20);
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  drawParticles();
+  drawNodes();
+  drawLogs();
 
   requestAnimationFrame(animate);
 }
 
 animate();
 
-/* responsive fix */
 window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
