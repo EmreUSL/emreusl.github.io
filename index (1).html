@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Emre Usul — Software Test Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-secondary-container": "#553099",
+          "secondary-container": "#dcc9ff",
+          "on-primary-container": "#200078",
+          "primary-container": "#a092ff",
+          "tertiary-fixed-dim": "#f17db3",
+          "surface-container-high": "#e0e3e6",
+          "surface-container-highest": "#dadde1",
+          "surface-tint": "#5944ca",
+          "secondary": "#6a46ae",
+          "on-tertiary": "#ffeff3",
+          "on-surface": "#2c2f31",
+          "surface-container-lowest": "#ffffff",
+          "surface-dim": "#d1d5d9",
+          "surface-container": "#e6e8ec",
+          "outline": "#75777a",
+          "inverse-primary": "#907eff",
+          "background": "#f5f6f9",
+          "secondary-fixed": "#dcc9ff",
+          "on-background": "#2c2f31",
+          "on-surface-variant": "#595c5e",
+          "surface": "#f5f6f9",
+          "primary-dim": "#4d36be",
+          "secondary-fixed-dim": "#d0b8ff",
+          "tertiary-container": "#ff8bc0",
+          "on-tertiary-container": "#62033c",
+          "tertiary": "#9a3669",
+          "primary-fixed": "#a092ff",
+          "on-secondary": "#f8efff",
+          "surface-container-low": "#eff1f4",
+          "outline-variant": "#abadb0",
+          "primary": "#5944ca",
+          "secondary-dim": "#5e39a1",
+          "inverse-surface": "#0c0f11",
+          "surface-bright": "#f5f6f9",
+          "error-container": "#f74b6d",
+          "surface-variant": "#dadde1",
+          "on-primary": "#f6f0ff",
+          "primary-fixed-dim": "#9282ff",
+          "tertiary-fixed": "#ff8bc0",
+          "error": "#b41340"
+        },
+        fontFamily: {
+          "headline": ["Space Grotesk"],
+          "body": ["Manrope"],
+          "label": ["Manrope"]
+        },
+        borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+  }
+  .code-texture {
+    background-image: radial-gradient(circle at 2px 2px, rgba(89, 68, 202, 0.05) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+  .bg-log-texture {
+    background-image: linear-gradient(rgba(44,47,49,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(44,47,49,0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* PAGE TRANSITIONS */
+  .page { display: none; opacity: 0; transform: translateY(20px); transition: opacity 0.45s ease, transform 0.45s ease; }
+  .page.active { display: block; }
+  .page.visible { opacity: 1; transform: translateY(0); }
+
+  /* SECTION REVEAL */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.shown { opacity: 1; transform: translateY(0); }
+
+  /* STAGGER CHILDREN */
+  .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; }
+  .stagger.shown > *:nth-child(1) { opacity:1; transform:none; transition-delay: 0s; }
+  .stagger.shown > *:nth-child(2) { opacity:1; transform:none; transition-delay: 0.08s; }
+  .stagger.shown > *:nth-child(3) { opacity:1; transform:none; transition-delay: 0.16s; }
+  .stagger.shown > *:nth-child(4) { opacity:1; transform:none; transition-delay: 0.24s; }
+  .stagger.shown > *:nth-child(5) { opacity:1; transform:none; transition-delay: 0.32s; }
+  .stagger.shown > *:nth-child(6) { opacity:1; transform:none; transition-delay: 0.40s; }
+
+  /* TERMINAL BLINK */
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .cursor { animation: blink 1s step-end infinite; }
+
+  /* SKILL BAR */
+  .skill-bar-fill { width: 0; transition: width 1s ease; }
+
+  /* NAV ACTIVE */
+  .nav-link { position: relative; }
+  .nav-link.active { color: #5944ca; }
+  .nav-link.active::after { content:''; position:absolute; bottom:-4px; left:0; right:0; height:2px; background:#5944ca; border-radius:2px; }
+
+  /* HOVER CARD */
+  .hover-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .hover-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(89,68,202,0.12); }
+
+  /* LANG TOGGLE */
+  .lang-btn { transition: all 0.2s; }
+  .lang-btn.active { background: #5944ca; color: #f6f0ff; }
+
+  /* TIMELINE DOT PULSE */
+  @keyframes pulse-ring { 0%{transform:scale(1);opacity:0.8} 100%{transform:scale(2.2);opacity:0} }
+  .pulse-dot::after { content:''; position:absolute; inset:-6px; border-radius:50%; border:2px solid #5944ca; animation: pulse-ring 2s ease-out infinite; }
+
+  /* MOBILE MENU */
+  #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  #mobile-menu.open { max-height: 400px; }
+
+  /* SCROLL BAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #f5f6f9; }
+  ::-webkit-scrollbar-thumb { background: #a092ff; border-radius: 3px; }
+</style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-container selection:text-on-primary-container">
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="fixed top-0 w-full z-50 bg-white/85 backdrop-blur-md shadow-sm">
+  <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
+    <div class="text-lg font-bold tracking-tighter text-slate-900 font-headline cursor-pointer" onclick="goTo('home')">
+      EU<span class="text-primary">_</span>QA
+    </div>
+    <div class="hidden md:flex items-center gap-8 font-headline font-bold tracking-tight">
+      <a class="nav-link text-slate-600 hover:text-slate-900 transition-all duration-200 cursor-pointer" onclick="goTo('home')" data-page="home">
+        <span data-en="Home" data-tr="Ana Sayfa">Home</span>
+      </a>
+      <a class="nav-link text-slate-600 hover:text-slate-900 transition-all duration-200 cursor-pointer" onclick="goTo('about')" data-page="about">
+        <span data-en="About" data-tr="Hakkımda">About</span>
+      </a>
+      <a class="nav-link text-slate-600 hover:text-slate-900 transition-all duration-200 cursor-pointer" onclick="goTo('projects')" data-page="projects">
+        <span data-en="Projects" data-tr="Projeler">Projects</span>
+      </a>
+      <a class="nav-link text-slate-600 hover:text-slate-900 transition-all duration-200 cursor-pointer" onclick="goTo('experience')" data-page="experience">
+        <span data-en="Experience" data-tr="Deneyim">Experience</span>
+      </a>
+    </div>
+    <div class="flex items-center gap-3">
+      <!-- Lang Toggle -->
+      <div class="hidden md:flex items-center bg-surface-container-low rounded-lg p-1 gap-1">
+        <button class="lang-btn text-xs font-bold px-2 py-1 rounded text-on-surface-variant" onclick="setLang('en')">EN</button>
+        <button class="lang-btn active text-xs font-bold px-2 py-1 rounded" onclick="setLang('tr')">TR</button>
+      </div>
+      <a href="EmreUSUL_Resume.pdf" download class="bg-primary text-on-primary px-4 md:px-6 py-2 rounded-lg font-bold text-sm transition-all hover:opacity-90 active:scale-95">
+        <span data-en="Resume" data-tr="CV">Resume</span>
+      </a>
+      <button class="md:hidden" onclick="toggleMobile()">
+        <span class="material-symbols-outlined text-on-surface">menu</span>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden bg-white border-t border-outline-variant/20">
+    <div class="flex flex-col px-6 py-4 gap-4 font-headline font-bold">
+      <a class="text-slate-600 cursor-pointer" onclick="goTo('home');toggleMobile()"><span data-en="Home" data-tr="Ana Sayfa">Home</span></a>
+      <a class="text-slate-600 cursor-pointer" onclick="goTo('about');toggleMobile()"><span data-en="About" data-tr="Hakkımda">About</span></a>
+      <a class="text-slate-600 cursor-pointer" onclick="goTo('projects');toggleMobile()"><span data-en="Projects" data-tr="Projeler">Projects</span></a>
+      <a class="text-slate-600 cursor-pointer" onclick="goTo('experience');toggleMobile()"><span data-en="Experience" data-tr="Deneyim">Experience</span></a>
+      <div class="flex gap-2">
+        <button class="lang-btn text-xs font-bold px-3 py-1.5 rounded bg-surface-container text-on-surface" onclick="setLang('en')">EN</button>
+        <button class="lang-btn active text-xs font-bold px-3 py-1.5 rounded bg-primary text-on-primary" onclick="setLang('tr')">TR</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ HOME PAGE ═══════════ -->
+<div id="page-home" class="page active code-texture">
+  <main class="pt-28 pb-20 px-6 max-w-7xl mx-auto min-h-screen">
+
+    <!-- Hero -->
+    <section class="reveal flex flex-col lg:flex-row items-center gap-12 mb-28 mt-8">
+      <div class="flex-1 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/20 text-primary font-label text-sm font-bold">
+          <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          <span data-en="Open to opportunities" data-tr="İş fırsatlarına açık">Open to opportunities</span>
+        </div>
+        <h1 class="font-headline text-6xl md:text-8xl font-bold leading-[0.9] tracking-tighter text-on-surface">
+          Emre<br/><span class="text-primary italic">Usul</span>
+        </h1>
+        <p class="text-primary font-headline text-xl md:text-2xl font-semibold tracking-tight">
+          <span data-en="Software Test Engineer" data-tr="Yazılım Test Mühendisi">Software Test Engineer</span>
+        </p>
+        <p class="max-w-xl text-on-surface-variant text-lg leading-relaxed">
+          <span data-en="Manual & Automation Testing specialist with 2+ years of enterprise experience at Vodafone, Mercedes-Benz, and Atos. Building reliable, scalable test frameworks with Selenium, Java & CI/CD." data-tr="Vodafone, Mercedes-Benz ve Atos'ta 2+ yıl kurumsal deneyime sahip Manuel & Otomasyon Test uzmanı. Selenium, Java ve CI/CD ile güvenilir, ölçeklenebilir test çerçeveleri oluşturmaya devam ediyor.">
+            Vodafone, Mercedes-Benz ve Atos'ta 2+ yıl kurumsal deneyime sahip Manuel &amp; Otomasyon Test uzmanı. Selenium, Java ve CI/CD ile güvenilir, ölçeklenebilir test çerçeveleri oluşturmaya devam ediyor.
+          </span>
+        </p>
+        <div class="flex flex-wrap gap-4 pt-2">
+          <button onclick="goTo('projects')" class="bg-primary hover:bg-primary-dim text-on-primary px-8 py-3.5 rounded-xl font-headline font-bold shadow-lg shadow-primary/20 transition-all active:scale-95">
+            <span data-en="View Projects" data-tr="Projelere Bak">View Projects</span>
+          </button>
+          <button onclick="goTo('experience')" class="bg-surface-container-high hover:bg-surface-container text-on-surface px-8 py-3.5 rounded-xl font-headline font-bold transition-all active:scale-95">
+            <span data-en="My Experience" data-tr="Deneyimim">My Experience</span>
+          </button>
+        </div>
+        <!-- Contact Row -->
+        <div class="flex flex-wrap gap-4 pt-2 text-sm text-on-surface-variant font-label">
+          <a href="/cdn-cgi/l/email-protection#27424a55425254524b094552544e4942545467404a464e4b0944484a" class="flex items-center gap-1.5 hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-base">mail</span> <span class="__cf_email__" data-cfemail="6b0e06190e1e181e0745091e1802050e18182b0c060a020745080406">[email&#160;protected]</span>
+          </a>
+          <a href="https://linkedin.com/in/emre-usul" target="_blank" class="flex items-center gap-1.5 hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-base">link</span> linkedin.com/in/emre-usul
+          </a>
+          <a href="https://github.com/EmreUSL" target="_blank" class="flex items-center gap-1.5 hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-base">code</span> github.com/EmreUSL
+          </a>
+        </div>
+      </div>
+
+      <!-- Terminal Card -->
+      <div class="flex-1 max-w-md w-full">
+        <div class="bg-inverse-surface rounded-2xl shadow-2xl overflow-hidden">
+          <div class="flex items-center gap-2 px-4 py-3 border-b border-white/10">
+            <div class="w-3 h-3 rounded-full bg-error"></div>
+            <div class="w-3 h-3 rounded-full bg-tertiary-fixed"></div>
+            <div class="w-3 h-3 rounded-full bg-primary-container"></div>
+            <span class="ml-3 text-xs font-mono text-surface-dim">emre@qa-terminal</span>
+          </div>
+          <div class="p-6 font-mono text-sm leading-8 text-surface-container-highest" id="terminal-content">
+            <div><span class="text-primary-container">$</span> <span class="text-white">whoami</span></div>
+            <div class="text-surface-dim pl-2">Emre Usul — Software Test Engineer</div>
+            <div class="mt-2"><span class="text-primary-container">$</span> <span class="text-white">cat skills.txt</span></div>
+            <div class="text-secondary-fixed-dim pl-2">Selenium · Java · TestNG</div>
+            <div class="text-secondary-fixed-dim pl-2">Rest Assured · Postman · SQL</div>
+            <div class="text-secondary-fixed-dim pl-2">Jenkins · Git · Jira</div>
+            <div class="mt-2"><span class="text-primary-container">$</span> <span class="text-white">./run-tests.sh</span></div>
+            <div class="text-tertiary-fixed-dim pl-2">✓ 400+ test cases — PASSED</div>
+            <div class="text-primary-container pl-2">✓ 0 critical defects leaked</div>
+            <div class="mt-2"><span class="text-primary-container">$</span> <span class="cursor text-white">█</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="reveal stagger grid grid-cols-2 md:grid-cols-4 gap-4 mb-28">
+      <div class="hover-card bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10 text-center">
+        <div class="text-4xl font-headline font-bold text-primary mb-1">400+</div>
+        <div class="text-xs text-on-surface-variant uppercase tracking-widest font-label">
+          <span data-en="Test Cases" data-tr="Test Senaryosu">Test Cases</span>
+        </div>
+      </div>
+      <div class="hover-card bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10 text-center">
+        <div class="text-4xl font-headline font-bold text-secondary mb-1">50+</div>
+        <div class="text-xs text-on-surface-variant uppercase tracking-widest font-label">
+          <span data-en="Automation Scripts" data-tr="Otomasyon Scripti">Automation Scripts</span>
+        </div>
+      </div>
+      <div class="hover-card bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10 text-center">
+        <div class="text-4xl font-headline font-bold text-tertiary mb-1">120+</div>
+        <div class="text-xs text-on-surface-variant uppercase tracking-widest font-label">
+          <span data-en="Defects Managed" data-tr="Hata Yönetimi">Defects Managed</span>
+        </div>
+      </div>
+      <div class="hover-card bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10 text-center">
+        <div class="text-4xl font-headline font-bold text-primary mb-1">2+</div>
+        <div class="text-xs text-on-surface-variant uppercase tracking-widest font-label">
+          <span data-en="Years Experience" data-tr="Yıl Deneyim">Years Experience</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Companies -->
+    <section class="reveal mb-20">
+      <p class="text-center text-xs text-on-surface-variant uppercase tracking-widest mb-8 font-label">
+        <span data-en="Worked with" data-tr="Çalıştığım şirketler">Worked with</span>
+      </p>
+      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 stagger">
+        <div class="font-headline font-bold text-xl text-on-surface-variant/40 hover:text-primary transition-colors">Vodafone</div>
+        <div class="font-headline font-bold text-xl text-on-surface-variant/40 hover:text-primary transition-colors">Mercedes-Benz</div>
+        <div class="font-headline font-bold text-xl text-on-surface-variant/40 hover:text-primary transition-colors">Atos</div>
+        <div class="font-headline font-bold text-xl text-on-surface-variant/40 hover:text-primary transition-colors">Paycell</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ═══════════ ABOUT PAGE ═══════════ -->
+<div id="page-about" class="page code-texture">
+  <main class="pt-28 pb-20 px-6 max-w-7xl mx-auto">
+
+    <section class="reveal mb-20 mt-8">
+      <span class="inline-block py-1 px-3 bg-secondary-container text-on-secondary-container text-xs font-bold tracking-widest uppercase rounded-full mb-6">
+        <span data-en="Background & Persona" data-tr="Geçmiş & Kimlik">Background &amp; Persona</span>
+      </span>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-7">
+          <h1 class="text-6xl md:text-8xl font-headline font-bold tracking-tighter text-on-surface leading-[0.9] mb-8">
+            <span data-en="Precision" data-tr="Hassasiyet">Precision</span><br/>
+            <span class="text-primary italic" data-en="by design." data-tr="tasarım gereği.">by design.</span>
+          </h1>
+          <p class="text-xl text-on-surface-variant font-light leading-relaxed max-w-2xl mb-8">
+            <span data-en="Software Test Automation Engineer with 2+ years of experience in enterprise-scale systems. Specialized in manual and automated testing using Selenium, API testing, and CI/CD pipelines. Strong focus on building reliable, maintainable, and scalable test frameworks that deliver business value." data-tr="Kurumsal ölçekli sistemlerde 2+ yıl deneyime sahip Yazılım Test Otomasyon Mühendisi. Selenium kullanarak manuel ve otomatik test, API testi ve CI/CD pipeline'larında uzmanlaşmış. Güvenilir, sürdürülebilir ve ölçeklenebilir test çerçeveleri oluşturmaya odaklanıyor.">
+              Software Test Automation Engineer with 2+ years of experience in enterprise-scale systems. Specialized in manual and automated testing using Selenium, API testing, and CI/CD pipelines. Strong focus on building reliable, maintainable, and scalable test frameworks that deliver business value.
+            </span>
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="https://linkedin.com/in/emre-usul" target="_blank" class="inline-flex items-center gap-2 bg-primary text-on-primary px-5 py-2.5 rounded-lg font-headline font-bold text-sm transition-all hover:opacity-90 active:scale-95">
+              <span class="material-symbols-outlined text-base">link</span> LinkedIn
+            </a>
+            <a href="https://github.com/EmreUSL" target="_blank" class="inline-flex items-center gap-2 bg-surface-container-high text-on-surface px-5 py-2.5 rounded-lg font-headline font-bold text-sm transition-all hover:bg-surface-container active:scale-95">
+              <span class="material-symbols-outlined text-base">code</span> GitHub
+            </a>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <!-- Info Card -->
+          <div class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm border border-outline-variant/10 space-y-4">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary">location_on</span>
+              <span class="font-label text-on-surface-variant">Istanbul, Turkey</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary">mail</span>
+              <a href="/cdn-cgi/l/email-protection#0a6f67786f7f797f6624687f7963646f79794a6d676b636624696567" class="font-label text-on-surface-variant hover:text-primary transition-colors"><span class="__cf_email__" data-cfemail="03666e71667670766f2d6176706a6d66707043646e626a6f2d606c6e">[email&#160;protected]</span></a>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary">phone</span>
+              <span class="font-label text-on-surface-variant">+90 539 854 63 70</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary">school</span>
+              <span class="font-label text-on-surface-variant">Kocaeli University — B.Sc. Electrical Eng.</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary">translate</span>
+              <span class="font-label text-on-surface-variant">Turkish (Native) · English (B1)</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary">workspace_premium</span>
+              <span class="font-label text-on-surface-variant">LambdaTest Certificate (2026)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QA Mindset -->
+    <section class="reveal mb-20">
+      <h2 class="font-headline text-4xl font-bold tracking-tight mb-10">
+        <span data-en="The QA Mindset" data-tr="QA Zihniyeti">The QA Mindset</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger">
+        <div class="hover-card md:col-span-1 p-8 bg-primary rounded-xl text-on-primary relative overflow-hidden">
+          <span class="material-symbols-outlined text-4xl mb-4 text-white/80">terminal</span>
+          <h3 class="text-2xl font-headline font-bold mb-3" data-en="Shift-Left Philosophy" data-tr="Erken Test Yaklaşımı">Shift-Left Philosophy</h3>
+          <p class="text-white/80 leading-relaxed text-sm" data-en="Quality at the earliest stages of SDLC. Automated checks integrated into the PR phase reduce technical debt before it becomes a liability." data-tr="SDLC'nin en erken aşamalarında kalite. PR aşamasına entegre otomatik kontroller, teknik borcu sorun haline gelmeden azaltır.">
+            Quality at the earliest stages of SDLC. Automated checks integrated into the PR phase reduce technical debt before it becomes a liability.
+          </p>
+          <div class="absolute right-0 bottom-0 opacity-10 p-4">
+            <span class="material-symbols-outlined text-9xl">integration_instructions</span>
+          </div>
+        </div>
+        <div class="hover-card p-8 bg-surface-container-lowest shadow-sm rounded-xl border border-outline-variant/10 flex flex-col justify-between">
+          <div>
+            <span class="material-symbols-outlined text-tertiary text-3xl mb-4">bug_report</span>
+            <h3 class="text-xl font-headline font-bold mb-2" data-en="Failure Analysis" data-tr="Hata Analizi">Failure Analysis</h3>
+          </div>
+          <p class="text-sm text-on-surface-variant" data-en="Deep-dive root cause analysis using log tracing and defect lifecycle management to prevent regression recurrence." data-tr="Regresyon tekrarını önlemek için log izleme ve hata yaşam döngüsü yönetimi ile kök neden analizi.">
+            Deep-dive root cause analysis using log tracing and defect lifecycle management to prevent regression recurrence.
+          </p>
+        </div>
+        <div class="hover-card p-8 bg-surface-container-lowest shadow-sm rounded-xl border border-outline-variant/10 flex flex-col justify-between">
+          <div>
+            <span class="material-symbols-outlined text-primary text-3xl mb-4">rocket_launch</span>
+            <h3 class="text-xl font-headline font-bold mb-2" data-en="Scalable CI/CD" data-tr="Ölçeklenebilir CI/CD">Scalable CI/CD</h3>
+          </div>
+          <p class="text-sm text-on-surface-variant" data-en="Architecting robust pipelines that integrate testing into every deployment cycle — ensuring quality is never a bottleneck." data-tr="Her dağıtım döngüsüne test entegre eden güçlü pipeline'lar — kalitenin hiçbir zaman darboğaz olmamasını sağlar.">
+            Architecting robust pipelines that integrate testing into every deployment cycle — ensuring quality is never a bottleneck.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="reveal mb-20">
+      <h2 class="font-headline text-4xl font-bold tracking-tight mb-10">
+        <span data-en="Technical Skills" data-tr="Teknik Beceriler">Technical Skills</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="space-y-6">
+          <div>
+            <div class="flex justify-between text-sm font-label font-bold mb-2">
+              <span>Selenium WebDriver / TestNG</span><span class="text-primary">90%</span>
+            </div>
+            <div class="h-2 bg-surface-container-high rounded-full overflow-hidden">
+              <div class="skill-bar-fill h-full bg-primary rounded-full" data-width="90"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm font-label font-bold mb-2">
+              <span>Rest Assured / API Testing</span><span class="text-primary">85%</span>
+            </div>
+            <div class="h-2 bg-surface-container-high rounded-full overflow-hidden">
+              <div class="skill-bar-fill h-full bg-secondary rounded-full" data-width="85"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm font-label font-bold mb-2">
+              <span>Java / Python</span><span class="text-primary">80%</span>
+            </div>
+            <div class="h-2 bg-surface-container-high rounded-full overflow-hidden">
+              <div class="skill-bar-fill h-full bg-primary rounded-full" data-width="80"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm font-label font-bold mb-2">
+              <span>SQL / Data Validation</span><span class="text-primary">75%</span>
+            </div>
+            <div class="h-2 bg-surface-container-high rounded-full overflow-hidden">
+              <div class="skill-bar-fill h-full bg-tertiary rounded-full" data-width="75"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm font-label font-bold mb-2">
+              <span>CI/CD / Jenkins / Git</span><span class="text-primary">80%</span>
+            </div>
+            <div class="h-2 bg-surface-container-high rounded-full overflow-hidden">
+              <div class="skill-bar-fill h-full bg-secondary rounded-full" data-width="80"></div>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="p-4 bg-surface-container-low rounded-xl">
+            <p class="text-xs text-on-surface-variant uppercase tracking-widest font-label mb-3" data-en="Test Automation" data-tr="Test Otomasyonu">Test Automation</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-primary-container text-on-primary-container text-xs font-bold rounded-full">Selenium WebDriver</span>
+              <span class="px-3 py-1 bg-primary-container text-on-primary-container text-xs font-bold rounded-full">Page Object Model</span>
+              <span class="px-3 py-1 bg-primary-container text-on-primary-container text-xs font-bold rounded-full">TestNG</span>
+              <span class="px-3 py-1 bg-primary-container text-on-primary-container text-xs font-bold rounded-full">JUnit</span>
+              <span class="px-3 py-1 bg-primary-container text-on-primary-container text-xs font-bold rounded-full">Maven</span>
+              <span class="px-3 py-1 bg-primary-container text-on-primary-container text-xs font-bold rounded-full">Allure Report</span>
+            </div>
+          </div>
+          <div class="p-4 bg-surface-container-low rounded-xl">
+            <p class="text-xs text-on-surface-variant uppercase tracking-widest font-label mb-3" data-en="API & Backend" data-tr="API & Backend">API &amp; Backend</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs font-bold rounded-full">Rest Assured</span>
+              <span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs font-bold rounded-full">Postman</span>
+              <span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs font-bold rounded-full">Swagger</span>
+              <span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs font-bold rounded-full">SoapUI</span>
+              <span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs font-bold rounded-full">SQL</span>
+            </div>
+          </div>
+          <div class="p-4 bg-surface-container-low rounded-xl">
+            <p class="text-xs text-on-surface-variant uppercase tracking-widest font-label mb-3" data-en="CI/CD & Tools" data-tr="CI/CD & Araçlar">CI/CD &amp; Tools</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-surface-container-highest text-on-surface text-xs font-bold rounded-full">Jenkins</span>
+              <span class="px-3 py-1 bg-surface-container-highest text-on-surface text-xs font-bold rounded-full">Git</span>
+              <span class="px-3 py-1 bg-surface-container-highest text-on-surface text-xs font-bold rounded-full">GitHub</span>
+              <span class="px-3 py-1 bg-surface-container-highest text-on-surface text-xs font-bold rounded-full">Jira</span>
+              <span class="px-3 py-1 bg-surface-container-highest text-on-surface text-xs font-bold rounded-full">Xray</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Certification -->
+    <section class="reveal mb-20 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="hover-card bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10">
+        <span class="material-symbols-outlined text-primary text-3xl mb-4">school</span>
+        <h3 class="font-headline text-xl font-bold mb-2" data-en="Education" data-tr="Eğitim">Education</h3>
+        <p class="font-headline font-bold text-on-surface">Kocaeli University</p>
+        <p class="text-on-surface-variant text-sm" data-en="B.Sc. in Electrical Engineering" data-tr="Elektrik Mühendisliği Lisans">B.Sc. in Electrical Engineering</p>
+        <p class="text-on-surface-variant text-sm">2018 – 2023 · GPA: 3.23 / 4.00</p>
+      </div>
+      <div class="hover-card bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10">
+        <span class="material-symbols-outlined text-primary text-3xl mb-4">workspace_premium</span>
+        <h3 class="font-headline text-xl font-bold mb-2" data-en="Certification" data-tr="Sertifikasyon">Certification</h3>
+        <p class="font-headline font-bold text-on-surface">LambdaTest</p>
+        <p class="text-on-surface-variant text-sm" data-en="Test Automation Professional Certificate" data-tr="Test Otomasyonu Profesyonel Sertifikası">Test Automation Professional Certificate</p>
+        <p class="text-on-surface-variant text-sm">2026</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ═══════════ PROJECTS PAGE ═══════════ -->
+<div id="page-projects" class="page bg-surface">
+  <main class="pt-28 pb-20 px-6 max-w-7xl mx-auto">
+
+    <section class="reveal mb-16 mt-8">
+      <span class="font-label text-primary font-bold tracking-widest uppercase mb-4 block">Archive 001</span>
+      <h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tighter leading-none text-on-background mb-6">
+        <span data-en="AUTOMATION" data-tr="OTOMASYON">AUTOMATION</span><br/>
+        <span class="text-primary-dim" data-en="SHOWCASE" data-tr="VITRIN">SHOWCASE</span>
+      </h1>
+      <p class="text-lg text-on-surface-variant leading-relaxed max-w-xl">
+        <span data-en="A curated collection of test frameworks, CI/CD integrations, and QA tools designed for high-scale software reliability." data-tr="Yüksek ölçekli yazılım güvenilirliği için tasarlanmış test çerçeveleri, CI/CD entegrasyonları ve QA araçlarından oluşan seçilmiş bir koleksiyon.">
+          A curated collection of test frameworks, CI/CD integrations, and QA tools designed for high-scale software reliability.
+        </span>
+      </p>
+    </section>
+
+    <!-- Bento Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+      <!-- Main Featured: Selenium Framework -->
+      <div class="md:col-span-8 group reveal">
+        <div class="hover-card bg-surface-container-lowest rounded-xl p-8 h-full shadow-sm relative overflow-hidden">
+          <div class="flex flex-col h-full">
+            <div class="flex justify-between items-start mb-10">
+              <div class="flex gap-2">
+                <span class="bg-primary-container text-on-primary-container font-label text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Open Source</span>
+                <span class="bg-surface-container text-on-surface-variant font-label text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Selenium</span>
+              </div>
+            </div>
+            <div class="mt-auto">
+              <h3 class="font-headline text-3xl font-bold text-on-surface mb-4">
+                <span data-en="Scalable Selenium Test Automation Framework" data-tr="Ölçeklenebilir Selenium Test Otomasyon Framework'ü">Scalable Selenium Test Automation Framework</span>
+              </h3>
+              <p class="font-body text-on-surface-variant mb-8">
+                <span data-en="A CI/CD-ready Selenium automation framework with parallel execution, layered architecture, and rich reporting. Thread-safe ThreadLocal WebDriver management, reusable UIActions/WaitActions abstraction layers, Allure reporting with custom assertion mechanisms." data-tr="Paralel çalıştırma, katmanlı mimari ve zengin raporlama ile CI/CD'ye hazır Selenium otomasyon framework'ü. Thread-safe ThreadLocal WebDriver yönetimi, yeniden kullanılabilir UIActions/WaitActions soyutlama katmanları, özel assertion mekanizmalı Allure raporlama.">
+                  A CI/CD-ready Selenium automation framework with parallel execution, layered architecture, and rich reporting. Thread-safe ThreadLocal WebDriver management, reusable UIActions/WaitActions abstraction layers, Allure reporting with custom assertion mechanisms.
+                </span>
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-3 py-1 bg-primary-container text-on-primary-container text-xs font-bold rounded-full">Java</span>
+                  <span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs font-bold rounded-full">Selenium</span>
+                  <span class="px-3 py-1 bg-surface-container text-on-surface text-xs font-bold rounded-full">TestNG</span>
+                  <span class="px-3 py-1 bg-surface-container text-on-surface text-xs font-bold rounded-full">Allure</span>
+                </div>
+                <a href="https://github.com/EmreUSL/selenium-automation-template" target="_blank" class="flex items-center gap-2 font-label text-sm font-bold text-primary group-hover:gap-3 transition-all">
+                  <span data-en="VIEW REPO" data-tr="REPO'YA GİT">VIEW REPO</span> <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+            <!-- Ghost code texture -->
+            <div class="absolute -right-4 -top-4 opacity-[0.03] pointer-events-none select-none font-mono text-xs">
+<pre>@Test
+public void regression() {
+  driver.get("/dashboard");
+  Assert.assertTrue(isLoaded());
+}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Terminal Snippet -->
+      <div class="md:col-span-4 reveal">
+        <div class="bg-inverse-surface rounded-xl p-6 h-full flex flex-col justify-between">
+          <div>
+            <div class="flex gap-1.5 mb-6">
+              <div class="w-3 h-3 rounded-full bg-error"></div>
+              <div class="w-3 h-3 rounded-full bg-tertiary-fixed"></div>
+              <div class="w-3 h-3 rounded-full bg-primary-container"></div>
+            </div>
+            <div class="font-mono text-xs text-surface-container-highest leading-relaxed">
+              <p class="text-primary-fixed">$ mvn test -Denv=prod</p>
+              <p class="mt-2 text-surface-dim">&gt; warming up suite...</p>
+              <p class="text-surface-dim">&gt; threads: parallel</p>
+              <p class="text-surface-dim">&gt; allure: <span class="text-tertiary-fixed">enabled</span></p>
+              <p class="text-surface-dim">&gt; status: <span class="text-primary-container">ALL PASSED ✓</span></p>
+            </div>
+          </div>
+          <div class="mt-8">
+            <h4 class="font-headline font-bold text-surface-container-highest text-lg mb-1" data-en="CI/CD Ready" data-tr="CI/CD'ye Hazır">CI/CD Ready</h4>
+            <p class="text-surface-variant text-xs font-label uppercase tracking-widest" data-en="Jenkins Integration" data-tr="Jenkins Entegrasyonu">Jenkins Integration</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coming Soon Card -->
+      <div class="md:col-span-12 reveal">
+        <div class="border-2 border-dashed border-outline-variant/40 rounded-xl p-10 text-center hover:border-primary/40 transition-colors">
+          <span class="material-symbols-outlined text-on-surface-variant/40 text-5xl mb-4">add_circle</span>
+          <h3 class="font-headline text-xl font-bold text-on-surface-variant/60 mb-2">
+            <span data-en="Personal Case Studies — Coming Soon" data-tr="Kişisel Case Study'ler — Yakında">Kişisel Case Study'ler — Yakında</span>
+          </h3>
+          <p class="text-sm text-on-surface-variant/50 max-w-md mx-auto">
+            <span data-en="I'm actively working on personal test automation projects to showcase my skills. Stay tuned!" data-tr="Yeteneklerimi sergilemek için kişisel otomasyon projeleri üzerinde aktif olarak çalışıyorum. Yakında burada olacak!">Yeteneklerimi sergilemek için kişisel otomasyon projeleri üzerinde aktif olarak çalışıyorum. Yakında burada olacak!</span>
+          </p>
+        </div>
+      </div>
+      <!-- Mini Tools -->
+      <div class="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 reveal">
+        <div class="hover-card p-4 rounded-xl bg-surface-container-low border border-outline-variant/5 flex items-center gap-4">
+          <div class="w-10 h-10 rounded bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+            <span class="material-symbols-outlined">api</span>
+          </div>
+          <div>
+            <h5 class="text-sm font-bold" data-en="API Testing" data-tr="API Testi">API Testing</h5>
+            <p class="text-[10px] text-on-surface-variant" data-en="Postman, Swagger, SoapUI" data-tr="Postman, Swagger, SoapUI">Postman, Swagger, SoapUI</p>
+          </div>
+        </div>
+        <div class="hover-card p-4 rounded-xl bg-surface-container-low border border-outline-variant/5 flex items-center gap-4">
+          <div class="w-10 h-10 rounded bg-secondary/10 flex items-center justify-center text-secondary flex-shrink-0">
+            <span class="material-symbols-outlined">analytics</span>
+          </div>
+          <div>
+            <h5 class="text-sm font-bold" data-en="Allure Reporting" data-tr="Allure Raporlama">Allure Reporting</h5>
+            <p class="text-[10px] text-on-surface-variant" data-en="Custom dashboards & reports" data-tr="Özel panolar ve raporlar">Custom dashboards &amp; reports</p>
+          </div>
+        </div>
+        <div class="hover-card p-4 rounded-xl bg-surface-container-low border border-outline-variant/5 flex items-center gap-4">
+          <div class="w-10 h-10 rounded bg-tertiary/10 flex items-center justify-center text-tertiary flex-shrink-0">
+            <span class="material-symbols-outlined">bug_report</span>
+          </div>
+          <div>
+            <h5 class="text-sm font-bold" data-en="Defect Management" data-tr="Hata Yönetimi">Defect Management</h5>
+            <p class="text-[10px] text-on-surface-variant">Jira · Xray · 120+ defects</p>
+          </div>
+        </div>
+        <div class="hover-card p-4 rounded-xl bg-surface-container-low border border-outline-variant/5 flex items-center gap-4">
+          <div class="w-10 h-10 rounded bg-surface-container-highest flex items-center justify-center text-on-surface-variant flex-shrink-0">
+            <span class="material-symbols-outlined">database</span>
+          </div>
+          <div>
+            <h5 class="text-sm font-bold" data-en="Backend Validation" data-tr="Backend Doğrulama">Backend Validation</h5>
+            <p class="text-[10px] text-on-surface-variant" data-en="SQL queries & joins" data-tr="SQL sorguları ve join'ler">SQL queries &amp; joins</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ═══════════ EXPERIENCE PAGE ═══════════ -->
+<div id="page-experience" class="page code-texture">
+  <main class="pt-28 pb-20 px-6 max-w-7xl mx-auto relative overflow-hidden">
+    <div class="absolute inset-0 code-texture pointer-events-none opacity-40 z-0"></div>
+
+    <!-- Header -->
+    <section class="relative z-10 mb-20 mt-8 reveal">
+      <span class="font-headline text-primary font-semibold tracking-widest text-sm uppercase mb-4 px-4 py-1 bg-primary-container/20 rounded-full inline-block">
+        <span data-en="Evolution of Quality" data-tr="Kalitenin Evrimi">Evolution of Quality</span>
+      </span>
+      <h1 class="font-headline text-6xl md:text-8xl font-bold text-on-background tracking-tighter max-w-4xl leading-[0.9] mt-4">
+        <span data-en="Career &" data-tr="Kariyer &">Career &amp;</span>
+        <span class="text-primary italic" data-en=" Experience" data-tr=" Deneyim"> Experience</span>
+      </h1>
+      <p class="mt-6 text-xl text-on-surface-variant max-w-2xl font-light leading-relaxed">
+        <span data-en="A journey from mobile development to manual precision to programmatic test excellence across enterprise systems." data-tr="Mobil geliştirmeden manuel hassasiyete, kurumsal sistemlerde programatik test mükemmelliğine uzanan bir yolculuk.">
+          A journey from mobile development to manual precision to programmatic test excellence across enterprise systems.
+        </span>
+      </p>
+    </section>
+
+    <!-- Timeline -->
+    <section class="relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 relative">
+        <!-- Center Line -->
+        <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary/50 via-outline-variant/30 to-transparent transform -translate-x-1/2"></div>
+
+        <!-- Vodafone -->
+        <div class="md:col-span-5 flex flex-col md:text-right items-start md:items-end reveal">
+          <div class="hover-card surface-container-low p-8 rounded-xl shadow-sm border-l-4 border-primary md:border-l-0 md:border-r-4 bg-surface-container-lowest/90 w-full">
+            <span class="font-headline text-2xl font-bold text-on-surface block" data-en="Software Test Engineer" data-tr="Yazılım Test Mühendisi">Software Test Engineer</span>
+            <span class="text-primary font-bold tracking-widest text-sm uppercase block mt-1">Vodafone · Istanbul</span>
+            <span class="text-on-surface-variant text-xs font-label block mt-1" data-en="October 2024 – Present" data-tr="Ekim 2024 – Günümüz">October 2024 – Present</span>
+            <p class="mt-4 text-on-surface-variant leading-relaxed text-sm">
+              <span data-en="Designed 400+ manual test cases for the Enterprise Product Management System. Developed 50+ automated regression tests with Selenium & Java. Managed 120+ defects in Jira." data-tr="Kurumsal Ürün Yönetim Sistemi için 400+ manuel test senaryosu tasarladı. Selenium & Java ile 50+ otomatik regresyon testi geliştirdi. Jira'da 120+ hatayı yönetti.">
+                Designed 400+ manual test cases for the Enterprise Product Management System. Developed 50+ automated regression tests with Selenium &amp; Java. Managed 120+ defects in Jira.
+              </span>
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2 justify-start md:justify-end">
+              <span class="px-3 py-1 bg-primary-container text-on-primary-container text-xs font-bold rounded-full">Selenium</span>
+              <span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs font-bold rounded-full">Rest Assured</span>
+              <span class="px-3 py-1 bg-surface-container text-on-surface text-xs font-bold rounded-full">SQL</span>
+              <span class="px-3 py-1 bg-surface-container text-on-surface text-xs font-bold rounded-full">Jira</span>
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:flex col-span-2 justify-center items-start pt-8">
+          <div class="relative w-4 h-4 rounded-full bg-primary ring-8 ring-primary/20 z-20 pulse-dot"></div>
+        </div>
+        <div class="md:col-span-5 pt-8 md:pt-4 reveal">
+          <div class="space-y-4">
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+              <div>
+                <h4 class="font-headline font-bold text-on-surface" data-en="SIT, SAT, UAT cycles" data-tr="SIT, SAT, UAT döngüleri">SIT, SAT, UAT cycles</h4>
+                <p class="text-on-surface-variant text-sm" data-en="Actively participated in all testing phases including regression and production support." data-tr="Regresyon ve prodüksiyon destek dahil tüm test aşamalarına aktif katılım.">Actively participated in all testing phases including regression and production support.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-tertiary mt-1">api</span>
+              <div>
+                <h4 class="font-headline font-bold text-on-surface" data-en="API Test Suites" data-tr="API Test Paketleri">API Test Suites</h4>
+                <p class="text-on-surface-variant text-sm" data-en="Comprehensive API testing with Rest Assured and Postman; backend validation via SQL." data-tr="Rest Assured ve Postman ile kapsamlı API testi; SQL ile backend doğrulama.">Comprehensive API testing with Rest Assured and Postman; backend validation via SQL.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mercedes-Benz -->
+        <div class="md:col-span-5 order-2 md:order-1 pt-8 md:pt-4 reveal">
+          <div class="space-y-4">
+            <div class="flex flex-row-reverse md:flex-row items-start gap-4">
+              <div class="flex-1">
+                <h4 class="font-headline font-bold text-on-surface" data-en="Structured QA Training" data-tr="Yapılandırılmış QA Eğitimi">Structured QA Training</h4>
+                <p class="text-on-surface-variant text-sm" data-en="Completed enterprise-level training in Software Testing and Business Analysis." data-tr="Kurumsal düzeyde Yazılım Testi ve İş Analizi eğitimini tamamladı.">Completed enterprise-level training in Software Testing and Business Analysis.</p>
+              </div>
+              <span class="material-symbols-outlined text-primary mt-1">school</span>
+            </div>
+            <div class="flex flex-row-reverse md:flex-row items-start gap-4">
+              <div class="flex-1">
+                <h4 class="font-headline font-bold text-on-surface" data-en="Agile / Scrum" data-tr="Agile / Scrum">Agile / Scrum</h4>
+                <p class="text-on-surface-variant text-sm" data-en="Sprint planning, CI/CD-based testing workflows, SDLC/STLC practices." data-tr="Sprint planlama, CI/CD tabanlı test iş akışları, SDLC/STLC uygulamaları.">Sprint planning, CI/CD-based testing workflows, SDLC/STLC practices.</p>
+              </div>
+              <span class="material-symbols-outlined text-tertiary mt-1">groups</span>
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:flex col-span-2 justify-center items-start pt-8 order-2">
+          <div class="w-4 h-4 rounded-full bg-secondary ring-8 ring-secondary/20 z-20"></div>
+        </div>
+        <div class="md:col-span-5 order-1 md:order-3 reveal">
+          <div class="hover-card surface-container-low p-8 rounded-xl shadow-sm border-l-4 border-secondary bg-surface-container-lowest/90 w-full">
+            <span class="font-headline text-2xl font-bold text-on-surface block" data-en="Software Test Engineer" data-tr="Yazılım Test Mühendisi">Software Test Engineer</span>
+            <span class="text-secondary font-bold tracking-widest text-sm uppercase block mt-1">Mercedes-Benz · Istanbul</span>
+            <span class="text-on-surface-variant text-xs font-label block mt-1" data-en="October 2023 – October 2024" data-tr="Ekim 2023 – Ekim 2024">October 2023 – October 2024</span>
+            <p class="mt-4 text-on-surface-variant leading-relaxed text-sm">
+              <span data-en="Manual and automated testing using Selenium with Java and Python. Test case design, execution, and defect reporting under senior QA guidance." data-tr="Java ve Python ile Selenium kullanarak manuel ve otomatik test. Kıdemli QA rehberliğinde test senaryosu tasarımı, yürütme ve hata raporlama.">
+                Manual and automated testing using Selenium with Java and Python. Test case design, execution, and defect reporting under senior QA guidance.
+              </span>
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs font-bold rounded-full">Python</span>
+              <span class="px-3 py-1 bg-primary-container text-on-primary-container text-xs font-bold rounded-full">Java</span>
+              <span class="px-3 py-1 bg-surface-container text-on-surface text-xs font-bold rounded-full">CI/CD</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Atos -->
+        <div class="md:col-span-5 flex flex-col md:text-right items-start md:items-end order-3 md:order-4 reveal">
+          <div class="hover-card surface-container-low p-8 rounded-xl shadow-sm border-l-4 border-tertiary md:border-l-0 md:border-r-4 bg-surface-container-lowest/90 w-full">
+            <span class="font-headline text-2xl font-bold text-on-surface block" data-en="Mobile App Developer & Tester" data-tr="Mobil Uygulama Geliştirici & Test">Mobile App Developer &amp; Tester</span>
+            <span class="text-tertiary font-bold tracking-widest text-sm uppercase block mt-1">Atos · Germany</span>
+            <span class="text-on-surface-variant text-xs font-label block mt-1" data-en="September 2022 – October 2023" data-tr="Eylül 2022 – Ekim 2023">September 2022 – October 2023</span>
+            <p class="mt-4 text-on-surface-variant leading-relaxed text-sm">
+              <span data-en="Mobile app development with Swift and React Native for an international client. Manual and functional testing, UI/UX validation, defect tracking in Agile sprints." data-tr="Uluslararası bir müşteri için Swift ve React Native ile mobil uygulama geliştirme. Manuel ve fonksiyonel test, UI/UX doğrulama, Agile sprint'lerinde hata takibi.">
+                Mobile app development with Swift and React Native for an international client. Manual and functional testing, UI/UX validation, defect tracking in Agile sprints.
+              </span>
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2 justify-start md:justify-end">
+              <span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container text-xs font-bold rounded-full">Swift</span>
+              <span class="px-3 py-1 bg-surface-container text-on-surface text-xs font-bold rounded-full">React Native</span>
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:flex col-span-2 justify-center items-start pt-8 order-5">
+          <div class="w-4 h-4 rounded-full bg-tertiary ring-8 ring-tertiary/20 z-20"></div>
+        </div>
+        <div class="md:col-span-5 pt-8 md:pt-4 order-6 reveal">
+          <div class="space-y-4">
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-tertiary mt-1">phone_iphone</span>
+              <div>
+                <h4 class="font-headline font-bold text-on-surface" data-en="International Project" data-tr="Uluslararası Proje">International Project</h4>
+                <p class="text-on-surface-variant text-sm" data-en="Worked on-site in Germany with an international development team." data-tr="Almanya'da uluslararası bir geliştirme ekibiyle yerinde çalıştı.">Worked on-site in Germany with an international development team.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary mt-1">verified</span>
+              <div>
+                <h4 class="font-headline font-bold text-on-surface" data-en="UI/UX Validation" data-tr="UI/UX Doğrulama">UI/UX Validation</h4>
+                <p class="text-on-surface-variant text-sm" data-en="Validated business flows and UI consistency across mobile platforms." data-tr="Mobil platformlar genelinde iş akışlarını ve UI tutarlılığını doğruladı.">Validated business flows and UI consistency across mobile platforms.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paycell -->
+        <div class="md:col-span-5 order-7 pt-4 reveal">
+          <div class="hover-card surface-container-low p-8 rounded-xl shadow-sm border-l-4 border-outline-variant bg-surface-container-lowest/90 w-full">
+            <span class="font-headline text-2xl font-bold text-on-surface block" data-en="iOS Developer Intern" data-tr="iOS Geliştirici Stajyeri">iOS Developer Intern</span>
+            <span class="text-on-surface-variant font-bold tracking-widest text-sm uppercase block mt-1">Paycell · Istanbul</span>
+            <span class="text-on-surface-variant text-xs font-label block mt-1" data-en="April 2022 – September 2022" data-tr="Nisan 2022 – Eylül 2022">April 2022 – September 2022</span>
+            <p class="mt-4 text-on-surface-variant leading-relaxed text-sm">
+              <span data-en="Contributed to Paycell mobile app — bug fixing and UI component design. iOS feature development with Swift, participating in Scrum ceremonies." data-tr="Paycell mobil uygulamasına katkı — hata düzeltme ve UI bileşen tasarımı. Swift ile iOS özellik geliştirme, Scrum törenlerine katılım.">
+                Contributed to Paycell mobile app — bug fixing and UI component design. iOS feature development with Swift, participating in Scrum ceremonies.
+              </span>
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-surface-container text-on-surface text-xs font-bold rounded-full">Swift</span>
+              <span class="px-3 py-1 bg-surface-container text-on-surface text-xs font-bold rounded-full">Scrum</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Terminal Log -->
+    <section class="mt-24 relative z-10 reveal">
+      <div class="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-2xl">
+        <div class="bg-surface-container-highest px-4 py-2 flex items-center justify-between">
+          <div class="flex space-x-2">
+            <div class="w-3 h-3 rounded-full bg-error"></div>
+            <div class="w-3 h-3 rounded-full bg-tertiary"></div>
+            <div class="w-3 h-3 rounded-full bg-primary"></div>
+          </div>
+          <span class="text-xs font-headline font-bold text-on-surface-variant tracking-widest uppercase">career_log.sh</span>
+          <div></div>
+        </div>
+        <div class="bg-inverse-surface p-8 font-mono text-sm leading-8 overflow-x-auto">
+          <div class="flex gap-4"><span class="text-surface-dim opacity-40">01</span><span class="text-primary-container">[INFO]</span><span class="text-on-primary" data-en="2+ years in enterprise QA engineering" data-tr="Kurumsal QA mühendisliğinde 2+ yıl">2+ years in enterprise QA engineering</span></div>
+          <div class="flex gap-4"><span class="text-surface-dim opacity-40">02</span><span class="text-secondary-container">[EXEC]</span><span class="text-on-primary" data-en="400+ test cases designed and executed" data-tr="400+ test senaryosu tasarlandı ve çalıştırıldı">400+ test cases designed and executed</span></div>
+          <div class="flex gap-4"><span class="text-surface-dim opacity-40">03</span><span class="text-tertiary-fixed-dim">[DONE]</span><span class="text-on-primary" data-en="120+ defects managed end-to-end in Jira" data-tr="Jira'da 120+ hata uçtan uca yönetildi">120+ defects managed end-to-end in Jira</span></div>
+          <div class="flex gap-4"><span class="text-surface-dim opacity-40">04</span><span class="text-primary-container">[PASS]</span><span class="text-on-primary" data-en="Selenium automation framework — open source" data-tr="Selenium otomasyon framework'ü — açık kaynak">Selenium automation framework — open source</span></div>
+          <div class="flex gap-4 mt-4"><span class="text-surface-dim opacity-40">05</span><span class="text-secondary-fixed-dim">[CERT]</span><span class="text-on-primary">LambdaTest Certified (2026) ✓</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="bg-slate-50 w-full py-12 px-8">
+  <div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
+    <div>
+      <p class="font-manrope text-sm uppercase tracking-widest text-slate-500">© 2025 Emre Usul</p>
+      <p class="font-manrope text-xs text-slate-400 mt-1" data-en="Software Test Engineer · Istanbul" data-tr="Yazılım Test Mühendisi · İstanbul">Software Test Engineer · Istanbul</p>
+    </div>
+    <div class="flex gap-8">
+      <a href="https://linkedin.com/in/emre-usul" target="_blank" class="font-manrope text-sm uppercase tracking-widest text-slate-500 hover:text-violet-600 underline underline-offset-4 transition-colors duration-300">LinkedIn</a>
+      <a href="https://github.com/EmreUSL" target="_blank" class="font-manrope text-sm uppercase tracking-widest text-slate-500 hover:text-violet-600 underline underline-offset-4 transition-colors duration-300">GitHub</a>
+      <a href="/cdn-cgi/l/email-protection#7411190611010701185a1601071d1a110707341319151d185a171b19" class="font-manrope text-sm uppercase tracking-widest text-slate-500 hover:text-violet-600 underline underline-offset-4 transition-colors duration-300">Email</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════ SCRIPT ═══════════ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  let currentPage = 'home';
+  let currentLang = 'tr';
+
+  function goTo(page) {
+    const prev = document.getElementById('page-' + currentPage);
+    prev.classList.remove('visible');
+    setTimeout(() => {
+      prev.classList.remove('active');
+      const next = document.getElementById('page-' + page);
+      next.classList.add('active');
+      setTimeout(() => {
+        next.classList.add('visible');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        revealAll(next);
+        animateBars(next);
+      }, 30);
+    }, 350);
+
+    currentPage = page;
+    document.querySelectorAll('.nav-link').forEach(l => {
+      l.classList.toggle('active', l.dataset.page === page);
+    });
+  }
+
+  function toggleMobile() {
+    const m = document.getElementById('mobile-menu');
+    m.classList.toggle('open');
+  }
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.textContent = lang === 'tr' ? el.dataset.tr : el.dataset.en;
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      const isActive = btn.textContent.trim().toLowerCase() === lang;
+      btn.classList.toggle('active', isActive);
+      if (isActive) {
+        btn.style.background = '#5944ca';
+        btn.style.color = '#f6f0ff';
+      } else {
+        btn.style.background = '';
+        btn.style.color = '';
+      }
+    });
+  }
+
+  function revealAll(container) {
+    const reveals = container.querySelectorAll('.reveal');
+    reveals.forEach((el, i) => {
+      setTimeout(() => {
+        el.classList.add('shown');
+        el.querySelectorAll('.stagger').forEach(s 
