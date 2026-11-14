@@ -17,35 +17,42 @@
 <body>
     <div class="container">
         <h1>Privacy Policy for ShiftGrid</h1>
-        <p><em>Last updated: September 15, 2026</em></p>
-        
+        <p><em>Last updated: November 14, 2026</em></p>
+
         <div class="highlight">
-            <strong>Summary:</strong> ShiftGrid is built with a <strong>Local-First, Privacy-by-Design</strong> architecture. We do NOT collect, transmit, share, or monetize any of your personal data, schedule information, or shift records. Everything stays 100% on your device.
+            <strong>Summary:</strong> Your shifts, work hours, notes and settings stay on your device. ShiftGrid has no account system and does not sell or share your data. Two limited exceptions are explained below: a one-time anonymous install notice sent by earlier versions (now stopped), and purchase processing through RevenueCat.
         </div>
 
         <h2>1. Information We Collect</h2>
-        <p><strong>None.</strong> ShiftGrid does not collect any personal identifying information (PII) such as your name, email, phone number, physical location, or contact list.</p>
+        <p>ShiftGrid does not ask for or collect your name, email address, phone number, location or contacts. Your schedule data is never sent to us.</p>
+        <p><strong>Install notice in earlier versions (stopped):</strong> Versions up to and including 1.0.8 sent a single message on first launch containing the device brand and model, operating system name and version, app version and the time of first launch. This message did not include any personal identifier or schedule data. It was delivered through the Telegram Bot API, whose servers are located outside Turkey. The receiving endpoint was disabled on November 14, 2026, so these messages are no longer delivered, and the feature is removed entirely from version 1.1.0 onward.</p>
 
         <h2>2. How Your Data is Stored</h2>
-        <p>All shift configurations, work hours, overtime limits, notes, and preferences you enter are stored locally on your device using encrypted native storage (AsyncStorage and Android AppWidget storage). When you uninstall the application, this data is automatically erased by your operating system.</p>
+        <p>All shift configurations, work hours, overtime limits, notes and preferences you enter are stored locally in the app's private storage on your device (AsyncStorage and Android home-screen widget storage). This storage is protected by your operating system's app sandbox; ShiftGrid does not add its own encryption. When you uninstall the app, this data is erased by your operating system. ShiftGrid does not back up your data to any server.</p>
 
-        <h2>3. Third-Party Services and Analytics</h2>
-        <p>ShiftGrid does NOT integrate third-party trackers, telemetry suites, advertising networks, or user profiling SDKs.</p>
+        <h2>3. Purchases (RevenueCat)</h2>
+        <p>Optional ShiftGrid PRO purchases are processed by Google Play or the Apple App Store. ShiftGrid uses <strong>RevenueCat</strong> (RevenueCat, Inc.) to verify purchases and unlock PRO features. For this purpose RevenueCat receives a randomly generated anonymous app user ID, your purchase records (product, price, date and store receipt) and basic device information such as platform, OS version and app version; like any network service, it also sees your IP address when the app connects. We do not link this ID to your name or email, and we never receive your payment card details. See RevenueCat's privacy policy: <a href="https://www.revenuecat.com/privacy">revenuecat.com/privacy</a>.</p>
 
-        <h2>4. Device Permissions</h2>
+        <h2>4. Other Third-Party Services</h2>
+        <p>ShiftGrid does not include advertising networks, analytics or tracking SDKs, or user-profiling services.</p>
+
+        <h2>5. Device Permissions</h2>
         <ul>
-            <li><strong>Notifications (POST_NOTIFICATIONS):</strong> Used solely to trigger local alarm notifications for upcoming shifts and the daily evening briefing. No notification data is transmitted externally.</li>
-            <li><strong>Vibration (VIBRATE):</strong> Used for tactile haptic feedback during calendar interactions and alarms.</li>
+            <li><strong>Notifications (POST_NOTIFICATIONS):</strong> Local reminders for upcoming shifts and the evening briefing. Notifications are created on the device; nothing is sent externally.</li>
+            <li><strong>Exact alarms (SCHEDULE_EXACT_ALARM, USE_EXACT_ALARM):</strong> Shift alarms that ring at the exact time you set.</li>
+            <li><strong>Run at startup (RECEIVE_BOOT_COMPLETED):</strong> Restores your scheduled alarms after the device restarts.</li>
+            <li><strong>Vibration (VIBRATE) and keep awake (WAKE_LOCK):</strong> Haptic feedback and making sure alarms fire while the device is asleep.</li>
+            <li><strong>Billing (com.android.vending.BILLING):</strong> Required by Google Play for in-app purchases.</li>
         </ul>
 
-        <h2>5. Children's Privacy</h2>
-        <p>Our application is not directed toward children under 13, and we do not knowingly collect information from children.</p>
+        <h2>6. Children's Privacy</h2>
+        <p>ShiftGrid is not directed toward children under 13, and we do not knowingly collect information from children.</p>
 
-        <h2>6. Changes to This Privacy Policy</h2>
-        <p>We may update our Privacy Policy from time to time. You are advised to review this page periodically for any changes.</p>
+        <h2>7. Changes to This Privacy Policy</h2>
+        <p>We will update this page when the app's data practices change. The date at the top shows the latest revision.</p>
 
-        <h2>7. Contact Us</h2>
-        <p>If you have questions or suggestions regarding our Privacy Policy, contact us at:</p>
+        <h2>8. Contact Us</h2>
+        <p>If you have questions about this Privacy Policy, contact us at:</p>
         <p><strong>Email:</strong> support@shiftgrid.app</p>
 
         <footer>
