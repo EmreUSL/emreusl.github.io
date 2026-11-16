@@ -1,63 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - ShiftGrid</title>
+    <title>Gizlilik Politikası ve KVKK Aydınlatma Metni - ShiftGrid</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #1e293b; max-width: 800px; margin: 0 auto; padding: 24px; background: #f8fafc; }
         .container { background: #ffffff; padding: 36px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
         h1 { color: #0f172a; font-size: 26px; border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; }
         h2 { color: #1e293b; font-size: 18px; margin-top: 24px; }
         p, li { color: #475569; font-size: 15px; }
+        table { border-collapse: collapse; width: 100%; font-size: 14px; margin: 12px 0; }
+        th, td { border: 1px solid #e2e8f0; padding: 8px 10px; text-align: left; vertical-align: top; color: #475569; }
+        th { background: #f1f5f9; color: #1e293b; }
         .highlight { background: #f1f5f9; padding: 12px 16px; border-left: 4px solid #3b82f6; border-radius: 4px; margin: 16px 0; font-size: 14px; }
+        .lang { font-size: 14px; margin-bottom: 8px; }
+        hr { border: 0; border-top: 2px solid #e2e8f0; margin: 40px 0; }
         footer { margin-top: 32px; font-size: 13px; color: #94a3b8; text-align: center; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Privacy Policy for ShiftGrid</h1>
-        <p><em>Last updated: November 14, 2026</em></p>
+<div class="container">
+    <p class="lang"><a href="#en">English version below</a></p>
 
-        <div class="highlight">
-            <strong>Summary:</strong> Your shifts, work hours, notes and settings stay on your device. ShiftGrid has no account system and does not sell or share your data. Two limited exceptions are explained below: a one-time anonymous install notice sent by earlier versions (now stopped), and purchase processing through RevenueCat.
-        </div>
+    <h1>ShiftGrid Gizlilik Politikası ve KVKK Aydınlatma Metni</h1>
+    <p><em>Son güncelleme: 16 Kasım 2026 · Uygulama sürümü 1.1.0 ve sonrası</em></p>
 
-        <h2>1. Information We Collect</h2>
-        <p>ShiftGrid does not ask for or collect your name, email address, phone number, location or contacts. Your schedule data is never sent to us.</p>
-        <p><strong>Install notice in earlier versions (stopped):</strong> Versions up to and including 1.0.8 sent a single message on first launch containing the device brand and model, operating system name and version, app version and the time of first launch. This message did not include any personal identifier or schedule data. It was delivered through the Telegram Bot API, whose servers are located outside Turkey. The receiving endpoint was disabled on November 14, 2026, so these messages are no longer delivered, and the feature is removed entirely from version 1.1.0 onward.</p>
-
-        <h2>2. How Your Data is Stored</h2>
-        <p>All shift configurations, work hours, overtime limits, notes and preferences you enter are stored locally in the app's private storage on your device (AsyncStorage and Android home-screen widget storage). This storage is protected by your operating system's app sandbox; ShiftGrid does not add its own encryption. When you uninstall the app, this data is erased by your operating system. ShiftGrid does not back up your data to any server.</p>
-
-        <h2>3. Purchases (RevenueCat)</h2>
-        <p>Optional ShiftGrid PRO purchases are processed by Google Play or the Apple App Store. ShiftGrid uses <strong>RevenueCat</strong> (RevenueCat, Inc.) to verify purchases and unlock PRO features. For this purpose RevenueCat receives a randomly generated anonymous app user ID, your purchase records (product, price, date and store receipt) and basic device information such as platform, OS version and app version; like any network service, it also sees your IP address when the app connects. We do not link this ID to your name or email, and we never receive your payment card details. See RevenueCat's privacy policy: <a href="https://www.revenuecat.com/privacy">revenuecat.com/privacy</a>.</p>
-
-        <h2>4. Other Third-Party Services</h2>
-        <p>ShiftGrid does not include advertising networks, analytics or tracking SDKs, or user-profiling services.</p>
-
-        <h2>5. Device Permissions</h2>
-        <ul>
-            <li><strong>Notifications (POST_NOTIFICATIONS):</strong> Local reminders for upcoming shifts and the evening briefing. Notifications are created on the device; nothing is sent externally.</li>
-            <li><strong>Exact alarms (SCHEDULE_EXACT_ALARM, USE_EXACT_ALARM):</strong> Shift alarms that ring at the exact time you set.</li>
-            <li><strong>Run at startup (RECEIVE_BOOT_COMPLETED):</strong> Restores your scheduled alarms after the device restarts.</li>
-            <li><strong>Vibration (VIBRATE) and keep awake (WAKE_LOCK):</strong> Haptic feedback and making sure alarms fire while the device is asleep.</li>
-            <li><strong>Billing (com.android.vending.BILLING):</strong> Required by Google Play for in-app purchases.</li>
-        </ul>
-
-        <h2>6. Children's Privacy</h2>
-        <p>ShiftGrid is not directed toward children under 13, and we do not knowingly collect information from children.</p>
-
-        <h2>7. Changes to This Privacy Policy</h2>
-        <p>We will update this page when the app's data practices change. The date at the top shows the latest revision.</p>
-
-        <h2>8. Contact Us</h2>
-        <p>If you have questions about this Privacy Policy, contact us at:</p>
-        <p><strong>Email:</strong> support.shiftgrid.app@gmail.com</p>
-
-        <footer>
-            &copy; 2026 ShiftGrid. All rights reserved.
-        </footer>
+    <div class="highlight">
+        <strong>Özet:</strong> Vardiyaların, çalışma saatlerin, ücret bilgilerin ve ayarların yalnızca kendi telefonunda saklanır; bize gönderilmez.
+        ShiftGrid'de hesap yoktur, reklam ve takip aracı yoktur, verilerin satılmaz. Nöbet listesinin fotoğrafı telefonunda okunur ve hiçbir yere gönderilmez.
+        Tek istisna, PRO satın alımlarını doğrulamak için kullanılan RevenueCat hizmetidir (aşağıda 4. bölüm).
     </div>
+
+    <h2>1. Veri sorumlusu</h2>
+    <p>Bu metin, 6698 sayılı Kişisel Verilerin Korunması Kanunu'nun (KVKK) 10. maddesi kapsamında hazırlanmıştır.<br>
+    <strong>Veri sorumlusu:</strong> Emre Usul (ShiftGrid uygulamasının geliştiricisi)<br>
+    <strong>İletişim ve başvuru:</strong> <a href="mailto:support.shiftgrid.app@gmail.com">support.shiftgrid.app@gmail.com</a></p>
+
+    <h2>2. Telefonunda kalan veriler (bize ulaşmaz)</h2>
+    <p>Takvime girdiğin vardiyalar, vardiya saatleri, ücret ve çalışma düzeni bilgileri (maaş, haftalık süre, zam oranları), vardiya döngüsü, alarm ayarları, tema ve dil tercihleri uygulamanın telefonundaki özel depolama alanında (AsyncStorage ve ana ekran widget'ı depolaması) tutulur.
+    Bu alan işletim sisteminin uygulama korumasıyla (sandbox) korunur; ShiftGrid ayrıca şifreleme eklemez. Bu veriler hiçbir sunucuya yedeklenmez veya gönderilmez, biz bunlara erişemeyiz.
+    Uygulamayı sildiğinde bu veriler işletim sistemi tarafından silinir.</p>
+
+    <h2>3. Listeden aktar (fotoğraf, Excel, CSV)</h2>
+    <ul>
+        <li>Nöbet listesinin fotoğrafını çektiğinde veya seçtiğinde yazı, <strong>telefonunun üzerinde</strong> okunur: Android'de uygulamanın içine gömülü Google ML Kit metin tanıma modeli (internet bağlantısı gerekmez), iOS'ta Apple'ın cihaz üzerindeki metin tanıma altyapısı kullanılır. Fotoğraf ve listedeki bilgiler bize veya başka bir sunucuya gönderilmez.</li>
+        <li>Listede iş arkadaşlarının adları bulunabilir. Bu adlar yalnızca sen "ben bu satırım" diye seçim yapabilesin diye ekranda geçici olarak gösterilir; <strong>kaydedilmez</strong>. Takvime yalnızca senin satırından çıkan vardiyalar yazılır.</li>
+        <li>Bir sonraki aktarımı kolaylaştırmak için telefonunda yalnızca şunlar saklanır: senin seçtiğin satırın adı, listedeki kısaltmaların karşılıkları (ör. "S" = gündüz), okunuşunu düzelttiğin kodlar (ör. "7:30-…" → "7:30-16") ve okunamayan hücreleri hangi kodla doldurduğunun sayısı. Bunlar hiçbir yere gönderilmez; "Listeden aktar &gt; Kayıtlı kısaltmalar" ekranından silebilirsin.</li>
+        <li>Fotoğraf ya da dosyanın uygulamanın geçici klasörüne alınan kopyası aktarım bitince veya pencere kapanınca silinir. Telefonundaki galeride bulunan asıl fotoğrafa dokunulmaz.</li>
+        <li>Android'deki metin tanıma kütüphanesi Google ML Kit'tir. Google, bu kütüphanenin çalışması ve iyileştirilmesi için görüntü içeriği <em>içermeyen</em> teknik kullanım ve tanılama bilgileri (ör. cihaz ve hizmet performansı) toplayabilir. Ayrıntı: <a href="https://developers.google.com/ml-kit/terms">ML Kit koşulları</a> ve <a href="https://policies.google.com/privacy">Google Gizlilik Politikası</a>.</li>
+        <li><strong>Çizelgeni bize gönderirsen (isteğe bağlı):</strong> Bir liste okunamazsa ya da yanlış okunursa "Bize gönder" ile telefonunun e-posta uygulaması açılır; istersen neyin yanlış okunduğunu yazdığın mesaj da eklenir. Ek, listenin kendisi değil, adları gizlenmiş bir kopyasıdır: okunan listede yalnızca gün başlığı ve senin satırın (adın **** ile kapatılmış), okunamayan fotoğrafta tüm adları kapatılmış görüntü, Excel/CSV listede yalnızca senin satırın (adın ****). Gizli kopya hazırlanamazsa ek gönderilmez. Göndermek tamamen senin kararındır; uygulama kendiliğinden hiçbir şey göndermez. Gönderirsen e-posta adresin, yazdığın mesaj, adları gizlenmiş liste kopyası ve e-postadaki kısa teknik not (uygulama ve Android sürümü, hata türü) bize ulaşır. Bunları yalnızca listeni okuyabilmek ve sana dönüş yapmak için kullanırız (KVKK md. 5/1 açık rıza; md. 5/2-f meşru menfaat), destek işi bitince ve en geç 6 ay içinde sileriz. E-posta Google (Gmail) altyapısıyla taşındığı için yurt dışına aktarım söz konusudur; göndererek buna rıza vermiş olursun.</li>
+    </ul>
+
+    <h2>4. Satın almalar (RevenueCat)</h2>
+    <p>İsteğe bağlı ShiftGrid PRO abonelikleri ve ömür boyu satın alım Google Play veya Apple App Store tarafından işlenir; kart bilgilerin bize hiçbir zaman ulaşmaz.
+    Satın alımını doğrulamak ve PRO özellikleri açmak için RevenueCat, Inc. (ABD) hizmeti kullanılır. RevenueCat'e şu bilgiler iletilir:</p>
+    <table>
+        <tr><th>Veri</th><th>Amaç</th><th>Hukuki sebep (KVKK md. 5)</th></tr>
+        <tr><td>Rastgele üretilmiş anonim uygulama kullanıcı kimliği</td><td>Satın alımı doğru kişiye bağlamak, geri yükleme</td><td>Sözleşmenin kurulması ve ifası (md. 5/2-c)</td></tr>
+        <tr><td>Satın alma kayıtları (ürün, fiyat, tarih, mağaza makbuzu, abonelik durumu)</td><td>PRO erişimini doğrulamak, aboneliği yönetmek</td><td>Sözleşmenin ifası (md. 5/2-c), hukuki yükümlülük (md. 5/2-ç)</td></tr>
+        <tr><td>Temel cihaz bilgisi (platform, işletim sistemi ve uygulama sürümü) ve bağlantı sırasında IP adresi</td><td>Hizmetin teknik olarak çalışması ve güvenliği</td><td>Meşru menfaat (md. 5/2-f)</td></tr>
+    </table>
+    <p>Bu kimlik adınla veya e-postanla ilişkilendirilmez. RevenueCat verileri ABD'deki sunucularda işler; bu aktarım, satın aldığın PRO hizmetinin sağlanması için yapılır.
+    RevenueCat'in gizlilik politikası: <a href="https://www.revenuecat.com/privacy">revenuecat.com/privacy</a>.
+    Satın alma bilgileri ayrıca ilgili mağaza (Google veya Apple) tarafından kendi gizlilik politikalarına göre işlenir.</p>
+
+    <h2>5. Kullanmadığımız şeyler</h2>
+    <p>ShiftGrid'de reklam ağı, analitik veya kullanıcı takibi yapan SDK, profil çıkarma, konum, rehber ve mikrofon erişimi yoktur. 1.0.8 ve önceki sürümlerde ilk açılışta gönderilen tek seferlik anonim kurulum bildirimi (cihaz markası/modeli, işletim sistemi, uygulama sürümü) 14 Kasım 2026'da durdurulmuş ve 1.1.0 sürümünden itibaren uygulamadan tamamen kaldırılmıştır.</p>
+
+    <h2>6. Cihaz izinleri</h2>
+    <ul>
+        <li><strong>Kamera:</strong> yalnızca "Listeden aktar"da nöbet listesinin fotoğrafını çekmek için, sen düğmeye bastığında.</li>
+        <li><strong>Fotoğraflar / dosyalar:</strong> sistemin seçici penceresiyle yalnızca senin seçtiğin tek fotoğraf veya dosya okunur; galerinin tamamına erişilmez.</li>
+        <li><strong>Bildirimler:</strong> vardiya alarmları ve akşam özeti telefonunda oluşturulur, dışarı gönderilmez.</li>
+        <li><strong>Tam zamanlı alarm (USE_EXACT_ALARM, SCHEDULE_EXACT_ALARM) ve tam ekran bildirim (USE_FULL_SCREEN_INTENT):</strong> Akıllı alarmın, kilit ekranında bile tam vaktinde çalıp tam ekran gösterilebilmesi için.</li>
+        <li><strong>Açılışta çalışma (RECEIVE_BOOT_COMPLETED), titreşim, uyanık tutma:</strong> telefon yeniden başladığında alarmları geri kurmak ve alarmın uyku modunda da çalması için.</li>
+        <li><strong>İnternet ve faturalandırma:</strong> yalnızca satın alma doğrulaması (RevenueCat, mağaza) için.</li>
+    </ul>
+
+    <h2>7. Saklama süresi</h2>
+    <p>Telefonundaki veriler, sen silene ya da uygulamayı kaldırana kadar telefonunda kalır. RevenueCat'teki satın alma kayıtları, satın alımın doğrulanabilmesi ve mağaza/vergi mevzuatının gerektirdiği süre boyunca tutulur; silinmesini e-postayla isteyebilirsin (anonim kullanıcı kimliğini bulmamız için satın alma tarihini ve mağaza sipariş numarasını yazman yeterlidir).</p>
+
+    <h2>8. KVKK md. 11 kapsamındaki hakların</h2>
+    <p>Kişisel verilerinin işlenip işlenmediğini öğrenme, işlenmişse bilgi isteme, işleme amacını ve amaca uygun kullanılıp kullanılmadığını öğrenme, yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme, eksik veya yanlış işlenmişse düzeltilmesini, KVKK md. 7 şartlarıyla silinmesini veya yok edilmesini ve bu işlemlerin aktarılan üçüncü kişilere bildirilmesini isteme, münhasıran otomatik sistemlerle analiz edilmesi sonucu aleyhine bir sonuç çıkmasına itiraz etme ve kanuna aykırı işleme nedeniyle zarara uğraman hâlinde zararın giderilmesini talep etme haklarına sahipsin.
+    Başvurunu <a href="mailto:support.shiftgrid.app@gmail.com">support.shiftgrid.app@gmail.com</a> adresine yazabilirsin; en geç 30 gün içinde ücretsiz yanıt verilir. Yanıttan memnun kalmazsan Kişisel Verileri Koruma Kurulu'na şikâyette bulunabilirsin.</p>
+
+    <h2>9. Çocuklar</h2>
+    <p>ShiftGrid çalışanlara yönelik bir uygulamadır; 13 yaşın altındaki çocuklara yönelik değildir ve bilerek çocuklardan veri toplamaz.</p>
+
+    <h2>10. Değişiklikler</h2>
+    <p>Uygulamanın veri uygulamaları değiştiğinde bu sayfa güncellenir; en üstteki tarih son değişikliği gösterir. Önemli değişiklikler uygulama güncelleme notlarında da belirtilir.</p>
+
+    <hr id="en">
+
+    <h1>ShiftGrid Privacy Policy</h1>
+    <p><em>Last updated: November 16, 2026 · App version 1.1.0 and later</em></p>
+
+    <div class="highlight">
+        <strong>Summary:</strong> Your shifts, work hours, pay settings and preferences are stored only on your phone and are never sent to us. ShiftGrid has no accounts, no ads and no tracking, and never sells your data. Roster photos are read on your phone and never uploaded. The only exception is RevenueCat, used to verify PRO purchases (section 4).
+    </div>
+
+    <h2>1. Controller</h2>
+    <p>Emre Usul, developer of ShiftGrid. Contact: <a href="mailto:support.shiftgrid.app@gmail.com">support.shiftgrid.app@gmail.com</a></p>
+
+    <h2>2. Data that stays on your phone</h2>
+    <p>Shifts, shift hours, pay and work-pattern settings, shift cycles, alarm settings and preferences are kept in the app's private storage on your device (AsyncStorage and home-screen widget storage), protected by the operating system's app sandbox. ShiftGrid does not add its own encryption, does not back this data up to any server and cannot access it. Uninstalling the app erases it.</p>
+
+    <h2>3. Import from roster (photo, Excel, CSV)</h2>
+    <ul>
+        <li>Text in a roster photo is recognised <strong>on your device</strong> (Google ML Kit model bundled inside the app on Android, no internet needed; Apple's on-device text recognition on iOS). The photo and its contents are never sent to us or any other server.</li>
+        <li>Co-workers' names that appear in the roster are shown temporarily so you can pick your own row and are <strong>not saved</strong>. Only the shifts from your row are written to your calendar.</li>
+        <li>To make the next import easier, only the following is stored on your phone: the name of the row you picked, what each roster code means (e.g. "D" = day), codes whose reading you corrected (e.g. "7:30-…" → "7:30-16") and a count of which code you used to fill unreadable cells. None of this is sent anywhere; you can delete it under "Import &gt; Saved codes".</li>
+        <li>The temporary copy of the photo or file is deleted when the import finishes or the window is closed. The original in your gallery is untouched.</li>
+        <li>On Android, Google may collect technical usage and diagnostic information (not image content) to operate and improve ML Kit. See the <a href="https://developers.google.com/ml-kit/terms">ML Kit terms</a> and the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</li>
+        <li><strong>If you send us your roster (optional):</strong> when a roster can't be read or is read incorrectly, "Send it to us" opens your email app, with your message about what was misread if you write one. The attachment is not the roster itself but a copy with names hidden: for a read roster only the day header and your own row (your name covered by ****), for an unreadable photo the whole image with every name covered, for Excel/CSV only your row (name ****). If the private copy can't be prepared, nothing is attached. Sending is entirely your choice; the app never sends anything by itself. If you send it, we receive your email address, your message, the name-hidden roster copy and a short technical note (app and OS version, error type). We use them only to support your roster and reply to you, and delete them when done and within 6 months at the latest.</li>
+    </ul>
+
+    <h2>4. Purchases (RevenueCat)</h2>
+    <p>Optional ShiftGrid PRO subscriptions and the lifetime purchase are processed by Google Play or the Apple App Store; we never receive your payment card details. To verify purchases and unlock PRO, ShiftGrid uses RevenueCat, Inc. (USA), which receives a randomly generated anonymous app user ID, your purchase records (product, price, date, store receipt, subscription status), basic device information (platform, OS and app version) and, like any network service, your IP address. This ID is not linked to your name or email. See <a href="https://www.revenuecat.com/privacy">revenuecat.com/privacy</a>.</p>
+
+    <h2>5. What we don't use</h2>
+    <p>No advertising networks, analytics or tracking SDKs, profiling, location, contacts or microphone access. The one-time anonymous install notice sent by versions up to 1.0.8 was stopped on November 14, 2026 and removed from version 1.1.0.</p>
+
+    <h2>6. Permissions</h2>
+    <p>Camera (only when you take a roster photo), photos/files (only the single item you pick via the system picker), notifications, exact alarms and full-screen notifications (so shift alarms ring on time, even on the lock screen), run at startup, vibration and wake lock (to restore and fire alarms), internet and billing (purchase verification only).</p>
+
+    <h2>7. Retention and your rights</h2>
+    <p>On-device data stays until you delete it or uninstall the app. RevenueCat purchase records are kept as long as needed to verify purchases and as required by store and tax rules. You can ask for access, correction or deletion by email (include your purchase date and store order number so we can find the anonymous ID). Turkish users have the rights listed in Article 11 of Law No. 6698 (KVKK); see the Turkish text above.</p>
+
+    <h2>8. Children and changes</h2>
+    <p>ShiftGrid is not directed at children under 13. We will update this page when our data practices change; the date above shows the latest revision.</p>
+
+    <footer>&copy; 2026 ShiftGrid · Emre Usul</footer>
+</div>
 </body>
 </html>
